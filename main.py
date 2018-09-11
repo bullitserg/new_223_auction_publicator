@@ -32,7 +32,7 @@ def create_parser():
     parser.add_argument('-t', '--type', type=str, choices=NEW_223_IMPORT_URLS.keys(), default='ea2',
                         help="Установить тип закупки")
 
-    parser.add_argument('-e', '--examinationDateTime', type=str, default='',
+    parser.add_argument('-e', '--examination_datetime', type=str, default='',
                         help="Установить дату рассмотрения заявок")
 
     return parser
@@ -75,7 +75,7 @@ if __name__ == '__main__':
             exit(1)
 
         if namespace.publish_auction:
-            auction_publication(namespace.auction, namespace.type, examinationDateTime=namespace.examinationDateTime)
+            auction_publication(namespace.auction, namespace.type, examinationDateTime=namespace.examination_datetime)
 
         elif namespace.cancel_auction:
             print('Здесь будет функция отмены аукциона, если она понадобится')
