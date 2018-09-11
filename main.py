@@ -39,6 +39,7 @@ def create_parser():
 
 
 def auction_publication(auction, database, **kwargs):
+    """Функция публикации процедуры с необходимыми корректировками"""
     xml_file, find_error = new_223_auction_finder(auction, out_dir)
     if find_error:
         print(find_error)
@@ -51,6 +52,31 @@ def auction_publication(auction, database, **kwargs):
     else:
         print('Пакет не валиден: ', correction_error)
     if input('Опубликовать аукцион? Y/n: ') not in 'YН':
+        return 1
+
+    imp_status, imp_info = new_223_import_xml(xml_file, database)
+    if imp_status:
+        print(imp_info)
+        return 0
+    else:
+        print('Пакет импортирован с ошибкой: %s' % imp_info)
+        return 1
+
+
+def auction_cancel(auction, database):
+    """Функция отмены процедуры"""
+    xml_file, find_error = new_223_auction_cancel_finder(auction, out_dir)
+    if find_error:
+        print(find_error)
+        if input('Продолжить? Y/n: ') not in 'YН':
+            return 1
+
+    correction_status, correction_error = new_223_xml_corrector(xml_file)
+    if correction_status:
+        print('Пакет валиден')
+    else:
+        print('Пакет не валиден: ', correction_error)
+    if input('Опубликовать отмену аукциона? Y/n: ') not in 'YН':
         return 1
 
     imp_status, imp_info = new_223_import_xml(xml_file, database)
@@ -78,7 +104,7 @@ if __name__ == '__main__':
             auction_publication(namespace.auction, namespace.type, examinationDateTime=namespace.examination_datetime)
 
         elif namespace.cancel_auction:
-            print('Здесь будет функция отмены аукциона, если она понадобится')
+            auction_cancel(namespace.auction, namespace.type)
 
         else:
             show_version()
