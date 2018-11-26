@@ -88,13 +88,13 @@ def auction_publication(auction, **kwargs):
     if input('Опубликовать аукцион? Y/n: ') not in 'YН':
         return 1
 
-#    imp_status, imp_info = new_223_import_xml(xml_file, database)
-#    if imp_status:
-#        print(imp_info)
-#        return 0
-#    else:
-#        print('Пакет импортирован с ошибкой: %s' % imp_info)
-#        return 1
+    imp_status, imp_info = new_223_import_xml(xml_file, database)
+    if imp_status:
+        print(imp_info)
+        return 0
+    else:
+        print('Пакет импортирован с ошибкой: %s' % imp_info)
+        return 1
 
 
 @string_decorator
