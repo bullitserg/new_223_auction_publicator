@@ -46,7 +46,7 @@ def create_parser():
     parser.add_argument('-e', '--examination_datetime', type=str, default='',
                         help="Установить дату рассмотрения заявок")
 
-    parser.add_argument('-e', '--set_random_guid', action='store_true',
+    parser.add_argument('-g', '--set_random_guid', action='store_true',
                         help="Установить рандомный GUID пакета")
 
     return parser
