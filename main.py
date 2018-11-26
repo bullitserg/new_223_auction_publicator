@@ -15,6 +15,7 @@ version_info = ''' Новое:
 [x] При публикации изменения извещения не обязательно указывать тип процедуры
 [x] Для отмены не нужно указывать тип закупки
 [x] Возможно отменять закупки на статусе отличающемся от приема заявок
+[x] Возможность смены GUID-a пакета
 '''
 
 
@@ -44,6 +45,9 @@ def create_parser():
 
     parser.add_argument('-e', '--examination_datetime', type=str, default='',
                         help="Установить дату рассмотрения заявок")
+
+    parser.add_argument('-e', '--set_random_guid', action='store_true',
+                        help="Установить рандомный GUID пакета")
 
     return parser
 
@@ -84,13 +88,13 @@ def auction_publication(auction, **kwargs):
     if input('Опубликовать аукцион? Y/n: ') not in 'YН':
         return 1
 
-    imp_status, imp_info = new_223_import_xml(xml_file, database)
-    if imp_status:
-        print(imp_info)
-        return 0
-    else:
-        print('Пакет импортирован с ошибкой: %s' % imp_info)
-        return 1
+#    imp_status, imp_info = new_223_import_xml(xml_file, database)
+#    if imp_status:
+#        print(imp_info)
+#        return 0
+#    else:
+#        print('Пакет импортирован с ошибкой: %s' % imp_info)
+#        return 1
 
 
 @string_decorator
