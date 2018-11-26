@@ -147,7 +147,8 @@ if __name__ == '__main__':
         if namespace.publish_auction:
             auction_publication(namespace.auction,
                                 type=namespace.type,
-                                examinationDateTime=namespace.examination_datetime)
+                                examinationDateTime=namespace.examination_datetime,
+                                set_random_guid=namespace.set_random_guid)
 
         elif namespace.cancel_auction:
             auction_cancel(namespace.auction)
